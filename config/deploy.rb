@@ -1,8 +1,8 @@
-# config valid for current version and patch releases of Capistrano
+`ssh-add`
 lock "~> 3.11.1"
 
-set :application, "candidate2020"
-set :repo_url, "git@github.com:newpowerparty/candidate2020.git"
+set :application, "candidate2020" #部署資料夾名
+set :repo_url, "git@github.com:newpowerparty/candidate2020.git" #ssh
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -20,20 +20,23 @@ set :repo_url, "git@github.com:newpowerparty/candidate2020.git"
 # Default value for :pty is false
 # set :pty, true
 
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
+# Default value for :linked_files is [] 忽略檔案
+append :linked_files, "config/application.yml", "config/master.key"
 
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+# Default value for linked_dirs is [] 忽略資料夾
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/uploads"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
-
+set :local_user, -> { "deploy" }
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+set :conditionally_migrate, true
+set :passenger_restart_with_touch, true
+
