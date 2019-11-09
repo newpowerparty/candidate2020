@@ -35,16 +35,21 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+
+
 ###################
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem "figaro"
 gem 'activeadmin'
 gem 'devise', '~> 4.2'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
 
 #youtube
 gem 'video_info', '~> 2.7'
+#照片
+gem 'carrierwave', '~> 2.0', '>= 2.0.1'
+gem 'mini_magick', '~> 4.9', '>= 4.9.3'
 
 
 group :development, :test do
