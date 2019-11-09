@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   devise_config[:controllers][:omniauth_callbacks] = 'admin_users/omniauth_callbacks'
   devise_for :admin_users, devise_config
   
-  
+  root "welcome#index"
 end
