@@ -1,9 +1,12 @@
+require 'capistrano/figaro'
 # Load DSL and set up stages
 require "capistrano/setup"
 
 # Include default deployment tasks
 require "capistrano/deploy"
-
+require "capistrano/rails"
+require 'capistrano/passenger'
+require 'rvm1/capistrano3'
 # Load the SCM plugin appropriate to your project:
 #
 # require "capistrano/scm/hg"
