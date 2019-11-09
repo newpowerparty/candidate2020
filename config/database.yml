@@ -1,0 +1,33 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  # username: eric
+  # password: 594233
+  username: <%= ENV['pg_user_name'] %>
+  password: <%= ENV['pg_password'] %>
+  host: <%= ENV['pg_host'] %>
+  
+development:
+  <<: *default
+  database: <%= ENV['pg_db'] %>
+
+test:
+  <<: *default
+  database: <%= ENV['pg_db'] %>
+
+production:
+  <<: *default
+  database: <%= ENV['pg_db'] %>
+
+staging:
+  <<: *default
+  database: <%= ENV['pg_db'] %>
+
+legacy: &legacy
+  <<: *default
+  pool: 5
+  database: legacy
+  username: npp
+  password: <%= ENV['pg_password'] %>
