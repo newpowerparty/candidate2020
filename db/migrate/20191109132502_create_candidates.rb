@@ -6,7 +6,6 @@ class CreateCandidates < ActiveRecord::Migration[5.2]
       t.string :school
       t.text :info
       t.text :experience
-      t.jsonb :contact
 
       t.timestamps
     end

@@ -1,0 +1,1 @@
+VideoInfo.provider_api_keys = { youtube: ENV['YOUTUBE_KEY'], vimeo: ENV['VIMEO_API_KEY'] }

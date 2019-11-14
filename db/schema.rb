@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2019_11_09_132502) do
     t.string "school"
     t.text "info"
     t.text "experience"
-    t.jsonb "contact"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

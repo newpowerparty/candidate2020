@@ -42,9 +42,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem "figaro"
 gem 'activeadmin'
+gem 'active_admin_flat_skin', github: "ayann/active_admin_flat_skin"
 gem 'devise', '~> 4.2'
 gem 'omniauth-google-oauth2'
-
+gem "rails-i18n"
 #youtube
 gem 'video_info', '~> 2.7'
 #照片
@@ -66,6 +67,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'capistrano'
   gem "capistrano-rails", "~> 1.4", require: false
+
   gem 'rvm1-capistrano3', require: false
   gem 'capistrano-passenger'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
