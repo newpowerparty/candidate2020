@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Newebpay::Engine => '/newebpay'
   # devise_for :admin_users, :controllers => { omniauth_callbacks: "admin_users/omniauth_callbacks" }
   ActiveAdmin.routes(self)
   # mount Ckeditor::Engine => '/ckeditor'
