@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  donation_category: one
+  amount: 1
+  image: MyString
+  active: false
+  name: MyString
+
+two:
+  donation_category: two
+  amount: 1
+  image: MyString
+  active: false
+  name: MyString

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  donation_reward: one
+  donation: one
+  quantity: 1
+  amount: 1
+
+two:
+  donation_reward: two
+  donation: two
+  quantity: 1
+  amount: 1

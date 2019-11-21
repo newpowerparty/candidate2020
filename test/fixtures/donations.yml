@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  donation_category: one
+  name: MyString
+  citizend: MyString
+  mobile_phone: 1
+  total_amount: 1
+  address: MyString
+  description: MyText
+  receipt_type: 1
+  donate_type: MyString
+  interger: MyString
+  confirmed: false
+  confirmed_at: MyString
+  datetime: MyString
+  anonymous: false
+
+two:
+  donation_category: two
+  name: MyString
+  citizend: MyString
+  mobile_phone: 1
+  total_amount: 1
+  address: MyString
+  description: MyText
+  receipt_type: 1
+  donate_type: MyString
+  interger: MyString
+  confirmed: false
+  confirmed_at: MyString
+  datetime: MyString
+  anonymous: false
