@@ -1,0 +1,10 @@
+<% donation_categories.each do |category| %>
+
+  <% if category.donation_rewards.present? %>
+    <% category.donation_rewards.each do |reward| %>
+      <%= reward.name %>
+    <% end %>
+  <% else %>
+    <%= category.name %>
+  <% end %>
+<% end %>

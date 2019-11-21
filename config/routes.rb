@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   devise_for :admin_users, devise_config
   
   root "welcome#index"
+
 end
