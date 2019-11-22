@@ -2,9 +2,32 @@
 
   <% if category.donation_rewards.present? %>
     <% category.donation_rewards.each do |reward| %>
-      <%= reward.name %>
+      <h1><%= reward.name %></h1>
+      <%= simple_form_for @donation, :url => donations_path, :method => :post do |f| %>
+        <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
+
+        <%= f.simple_fields_for :donation_items do |donation_item_form| %>
+          <%= render "donations/donation_item", f: donation_item_form, reward: reward %>
+    
+
+        <% end %>
+
+        <%= f.input :name %>
+        <%= f.input :mobile_phone %>
+        <%= f.input :address %>
+        <%= f.submit %>
+      <% end %>
     <% end %>
   <% else %>
-    <%= category.name %>
+    <h1><%= category.name %></h1>
+    <%= simple_form_for @donation, :url => donations_path, :method => :post do |f| %>
+      <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
+      <%= f.input :name %>
+      <%= f.input :total_amount %>
+      <%= f.input :mobile_phone %>
+      <%= f.input :address %>
+      <%= f.submit %>
+    <% end %>
   <% end %>
+
 <% end %>

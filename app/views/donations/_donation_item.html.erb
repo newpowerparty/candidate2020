@@ -1,0 +1,5 @@
+<%= f.input :donation_reward_id, as: :hidden, input_html: { value: reward.id } %>
+<%= image_tag(reward.image.thumb.url, class: "img-responsive") if reward.image? %>
+<h4 class="media-heading"><%= reward.name_amount%></h4>
+<div class="">數量：<%= f.input :quantity, collection: 1..10, label: false, include_blank: "請選擇數量", input_html:{class: "require_select_one"} %></div>
+

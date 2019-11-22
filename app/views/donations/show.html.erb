@@ -1,0 +1,11 @@
+
+<p>姓名：<%= @donation.name %></p> 
+<p>地址：<%= @donation.address %></p>
+<p>手機號碼為：<%= @donation.mobile_phone %></p>
+
+<% @donation.donation_items.each do |item| %>
+  <p>品名：<%= item.donation_reward.name%></p>
+  <p>數量：<%= item.quantity %></p>
+<% end %>
+
+<p>總金額：<%= @donation.total_amount %></p>

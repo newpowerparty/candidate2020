@@ -46,6 +46,7 @@ gem 'active_admin_flat_skin', github: "ayann/active_admin_flat_skin"
 gem 'devise', '~> 4.2'
 gem 'omniauth-google-oauth2'
 gem "rails-i18n"
+gem 'simple_form', '~> 5.0', '>= 5.0.1'
 #youtube
 gem 'video_info', '~> 2.7'
 #照片
