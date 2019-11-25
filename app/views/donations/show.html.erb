@@ -9,3 +9,8 @@
 <% end %>
 
 <p>總金額：<%= @donation.total_amount %></p>
+<% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>
+<%= newebpay_donation_pay_button "前往捐款", "https://cdonate.newebpay.com/npp/2020guarantee", 
+  order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
+  name: @donation.name, phone: @donation.mobile_phone,
+  class: 'btn btn-success', id: 'donation' %>

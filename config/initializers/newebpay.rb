@@ -1,10 +1,11 @@
 Newebpay.configure do |config|
   # 預設商店代號
-  config.merchant_id = 'place_your_merchant_id_here'
+  config.merchant_id = ENV['NEWEBPAY_MERCHANT_ID']
   # Hash Key
-  config.hash_key = 'place_your_hash_key_here'
+  config.hash_key = ENV['NEWEBPAY_HASH_KEY']
   # Hash IV
-  config.hash_iv = 'place_your_hash_iv_here'
+  config.hash_iv = ENV['NEWEBPAY_HASH_IV']
+
 
   # for development 測試環境
   config.mpg_gateway_url = 'https://ccore.newebpay.com/MPG/mpg_gateway' #MPG金流
@@ -76,16 +77,16 @@ Newebpay.configure do |config|
   #------------------------
 
   # # 定期定額委託單建立完成後使用者導回到網站觸發的callback。若不啟用，付款人將停留在藍新金流交易完成頁面
-  # config.periodical_callback do |newebpay_response|
-  # # 範例
-  #   if newebpay_response.success?
-  #     p "定期定額建立"
-  #     flash[:success] = newebpay_response.message
-  #   else
-  #     flash[:error] = newebpay_response.message
-  #   end
-  #   redirect_to root_path
-  # end
+  config.periodical_callback do |newebpay_response|
+  # 範例
+    if newebpay_response.success?
+      p "定期定額建立"
+      flash[:success] = newebpay_response.message
+    else
+      flash[:error] = newebpay_response.message
+    end
+    redirect_to root_path
+  end
 
   # # 每期交易完成後觸發的callback，
   # config.periodical_notify_callback do |newebpay_response|
@@ -99,16 +100,16 @@ Newebpay.configure do |config|
   # end
   #-----------------------
 
-  # #捐款付款後觸發的callback。
-  # config.donation_notify_callback do |newebpay_response|
-  #   p "捐款notify"
-  #   if newebpay_response.success?
-  #     Donation.find_by(merchant_order_no: newebpay_response.result.merchant_order_no)
-  #          .update_attributes!(paid: true)
-  #   else
-  #     Rails.logger.info "Newebpay Donation Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
-  #   end
-  # end
+  #捐款付款後觸發的callback。
+  config.donation_notify_callback do |newebpay_response|
+    p "捐款notify"
+    if newebpay_response.success?
+      Donation.find_by(id: newebpay_response.result.merchant_order_no).update_attributes!(confirmed: true, confirmed_at: Time.now)
+      redirect_to root_path
+    else
+      Rails.logger.info "Newebpay Donation Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
+    end
+  end
   #-----------------------
 
   # #信用卡取消授權批次處理的callback。
