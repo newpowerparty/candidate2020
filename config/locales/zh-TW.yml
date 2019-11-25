@@ -214,3 +214,5 @@
       donation_category: "捐款項目"
       donation_reward: "小物品項"
       donation: "訂單"
+  misc:
+    dollar: "元"

@@ -2,17 +2,18 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
-    if @donation.save!
-      @donation_itmes = @donation.donation_items.new
-      @donation_itmes.donation_id = @donation.id
-      @donation_itmes.donation_reward_id = params[:donation][:donation_items][:donation_reward_id]
-      @donation_itmes.quantity = params[:donation][:donation_items][:quantity]
-      @donation_itmes.save!
+    if @donation.save
+      if @donation.donation_category_id == 1  #小物
+        @donation_itmes = @donation.donation_items.new(donation_id: @donation.id, donation_reward_id: params[:donation][:donation_items][:donation_reward_id], quantity: params[:donation][:donation_items][:quantity])
+        @donation_itmes.save!
+        @donation.set_total_amount
+      end
       cookies.encrypted[:donation_id] = { value: @donation.id, expires: 15.minutes.from_now }
+      redirect_to donation_path(@donation)
+    else
+      redirect_to root_path, notice: "新增失敗"
     end
-    @donation.set_total_amount
-
-    redirect_to donation_path(@donation)
+    
   end
 
   def show

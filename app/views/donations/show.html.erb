@@ -3,10 +3,11 @@
 <p>地址：<%= @donation.address %></p>
 <p>手機號碼為：<%= @donation.mobile_phone %></p>
 
-<% item = @donation.donation_items.first %>
-<p>品名：<%= item.donation_reward.name %></p>
-<p>數量：<%= item.quantity %></p>
-
+<% if @donation.donation_items.present? %>
+  <% item = @donation.donation_items.first %>
+  <p>品名：<%= item.donation_reward.name %></p>
+  <p>數量：<%= item.quantity %></p>
+<% end %>
 
 <p>總金額：<%= @donation.total_amount %></p>
 
