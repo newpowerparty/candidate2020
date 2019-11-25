@@ -13,10 +13,23 @@ class Donation < ApplicationRecord
     paper: 1, #紙本收據
     no_receipt: 2 #不要收據
   }
+  validates :name, presence: true, unless: :anonymous?
+  validates :citizen_id, presence: true, unless: :anonymous?
+  validates :mobile_phone, presence: true, unless: :anonymous?
+  validates :email, presence: true
+  validates :email, email: true
+  validates :receipt_title, presence: true, if: Proc.new {|a| !a.anonymous? && !a.no_receipt? }
+  #validates :address, presence: true
   
+  
+  before_save :upcase_field, if: Proc.new { |a| a.citizen_id.present? }
   
   def set_total_amount
     self.total_amount = donation_items.sum(:amount)
     self.save
+  end
+
+  def upcase_field
+    self.citizen_id.to_s.upcase
   end
 end

@@ -104,8 +104,8 @@ Newebpay.configure do |config|
   config.donation_notify_callback do |newebpay_response|
     p "捐款notify"
     if newebpay_response.success?
-      Donation.find_by(id: newebpay_response.result.merchant_order_no).update_attributes!(confirmed: true, confirmed_at: Time.now)
-      redirect_to root_path
+      Donation.find_by(id: newebpay_response.result.merchant_order_no).update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
+      redirect_to "https://2020staging.npp.vote/"
     else
       Rails.logger.info "Newebpay Donation Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
     end

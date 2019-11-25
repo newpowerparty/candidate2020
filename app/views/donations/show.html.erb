@@ -3,14 +3,19 @@
 <p>地址：<%= @donation.address %></p>
 <p>手機號碼為：<%= @donation.mobile_phone %></p>
 
-<% @donation.donation_items.each do |item| %>
-  <p>品名：<%= item.donation_reward.name%></p>
-  <p>數量：<%= item.quantity %></p>
-<% end %>
+<% item = @donation.donation_items.first %>
+<p>品名：<%= item.donation_reward.name %></p>
+<p>數量：<%= item.quantity %></p>
+
 
 <p>總金額：<%= @donation.total_amount %></p>
-<% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>
-<%= newebpay_donation_pay_button "前往捐款", "https://cdonate.newebpay.com/npp/2020guarantee", 
-  order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
-  name: @donation.name, phone: @donation.mobile_phone, payment_methods: [:credit_card, :webatm, :vacc, :barcode, :cvs],
-  class: 'btn btn-success', id: 'donation' %>
+
+
+<% if @donation.confirmed.blank? %>
+  <% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>
+  <%= newebpay_donation_pay_button "前往捐款", "https://cdonate.newebpay.com/npp/2020guarantee", 
+    order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
+    name: @donation.name, phone: @donation.mobile_phone, payment_methods: [:credit_card, :webatm, :vacc, :barcode, :cvs],
+    class: 'btn btn-success', id: 'donation' %>
+
+<% end %>

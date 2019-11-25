@@ -4,7 +4,7 @@ ActiveAdmin.register DonationReward do
     index do
       selectable_column
       id_column
-      column :donation_category_id
+      column :donation_category
       column :name
       column "Image" do |product|
         image_tag product.image.thumb.url
