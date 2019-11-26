@@ -17,6 +17,7 @@ ActiveAdmin.register Donation do
     end
   
     filter :confirmed
+    filter :donation_category
   
     form do |f|
       f.inputs do
@@ -36,5 +37,10 @@ ActiveAdmin.register Donation do
       f.actions
     end
   
+    controller do
+      def scoped_collection
+        super.includes :donation_category
+      end
+    end
   end
   

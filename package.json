@@ -1,5 +1,7 @@
 {
   "name": "candidate2020",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery-twzipcode": "^1.7.15-rc1"
+  }
 }
