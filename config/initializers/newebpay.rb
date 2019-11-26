@@ -112,6 +112,8 @@ Newebpay.configure do |config|
 
       redirect_to "https://2020staging.npp.vote/"
     else
+      p "交易狀態為 #{newebpay_response.success?}"
+      p "交易失敗"
       Rails.logger.info "Newebpay Donation Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
     end
   end
