@@ -103,9 +103,13 @@ Newebpay.configure do |config|
   #捐款付款後觸發的callback。
   config.donation_notify_callback do |newebpay_response|
     p "捐款notify"
-    p "印出交易狀態#{newebpay_response}"
+    
     if newebpay_response.success?
-      Donation.find_by(id: newebpay_response.result.merchant_order_no).update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
+      p "交易成功"
+      donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
+      p "印出donation#{donation}"
+      donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
+
       redirect_to "https://2020staging.npp.vote/"
     else
       Rails.logger.info "Newebpay Donation Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
