@@ -110,6 +110,8 @@ Newebpay.configure do |config|
       p "交易成功"
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
       p "印出donation#{donation.id}"
+      p "印出confirmed_at#{newebpay_response.result.pay_time}"
+      p "印出payment_type#{newebpay_response.result.payment_type}"
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
       
       p "donation錯誤#{donation.errors}"
