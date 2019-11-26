@@ -5,7 +5,7 @@ ActiveAdmin.register Candidate do
     selectable_column
     id_column
     column :name
-    column "avatar" do |product|
+    column :avatar do |product|
       image_tag product.avatar.url
     end
     column :school

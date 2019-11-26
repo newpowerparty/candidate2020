@@ -181,6 +181,13 @@
         anonymous: "匿名"
         created_at: "建立時間"
         updated_at: "更新時間"
+        zipcode: "郵遞區號"
+        road: "街道"
+        county: "縣市"
+        district: "區域"
+        payment_type: "付款方式"
+        donation_items: "數量"
+        donation_rewards: "品名"
       donation_category:
         name: "捐款名稱"
         content: "內容"
