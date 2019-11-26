@@ -10,13 +10,17 @@
         <% end %>
         
         <div id="twzipcode<%= count %>"><% count += 1 %>
-          <div data-role="county" data-style="Style Name" data-value="110"></div>
-          <div data-role="district" data-style="Style Name" data-value="臺北市"></div>
-          <div data-role="zipcode" data-style="Style Name" data-value="信義區"></div>
+          <div data-role="county" data-style="Style Name" data-name="donation[county]" data-value="110"></div>
+          <div data-role="district" data-style="Style Name" data-name="donation[district]" data-value="臺北市"></div>
+          <div class="hidden"
+               data-role="zipcode"
+               data-name="donation[zipcode]"
+               >
+          </div>
         </div>
+        <%= f.input :road, required: true %>
         <%= f.input :name, required: true %>
         <%= f.input :mobile_phone, required: true %>
-        <%= f.input :address %>
         <%= f.submit %>
       <% end %>
     <% end %>
@@ -26,15 +30,19 @@
       <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
 
       <div id="twzipcode<%= count %>"> <% count += 1 %>
-        <div data-role="county" data-style="Style Name" data-value="110"></div>
-        <div data-role="district" data-style="Style Name" data-value="臺北市"></div>
-        <div data-role="zipcode" data-style="Style Name" data-value="信義區"></div>
+        <div data-role="county" data-style="Style Name" data-name="donation[county]" data-value="110"></div>
+        <div data-role="district" data-style="Style Name" data-name="donation[district]" data-value="臺北市"></div>
+        <div class="hidden"
+            data-role="zipcode"
+            data-name="donation[zipcode]"
+            >
+        </div>
       </div>
 
+      <%= f.input :road, required: true %>
       <%= f.input :name, required: true %>
       <%= f.input :total_amount, required: true %>
       <%= f.input :mobile_phone, required: true %>
-      <%= f.input :address %>
       <%= f.submit %>
     <% end %>
   <% end %>
@@ -45,10 +53,17 @@
 <script language="JavaScript">
 
     // var citizen_id_selector = $("#donation_citizen_id");
-     //var citizen_id = new Inputmask("A999999999");
+   var county = $('.county').val();
+   var district = $('.district').val();
    $(document).ready(function(){
      for(i=0; i < '<%= count %>'; i++){
-       $(`#twzipcode${i}`).twzipcode();
+       $(`#twzipcode${i}`).twzipcode({
+        zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+        css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱 
+        countyName: county, // 自訂城市 select 標籤的 name 值
+        districtName: district // 自訂區別 select 標籤的 name 值
+        }
+       );
      }
    });
  </script>

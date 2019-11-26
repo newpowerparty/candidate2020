@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_043449) do
+ActiveRecord::Schema.define(version: 2019_11_26_061043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_11_25_043449) do
     t.string "citizend"
     t.integer "mobile_phone"
     t.integer "total_amount"
-    t.string "address"
     t.text "description"
     t.integer "receipt_type"
     t.integer "donate_type"
@@ -97,6 +96,10 @@ ActiveRecord::Schema.define(version: 2019_11_25_043449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "payment_type"
+    t.string "county"
+    t.string "district"
+    t.integer "zipcode"
+    t.string "road"
     t.index ["donation_category_id"], name: "index_donations_on_donation_category_id"
   end
 

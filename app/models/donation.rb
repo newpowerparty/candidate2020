@@ -17,12 +17,16 @@ class Donation < ApplicationRecord
   validates :total_amount, numericality: { only_integer: true, greater_than: 299, message: "捐款金額不得低於300" }, if: Proc.new{ |a| a.donation_category_id == 2 } 
   validates :name, presence: { message: "不能空白" }, unless: :anonymous?
   validates :mobile_phone, presence: { message: "手機號碼不得為空" }, unless: :anonymous?
-  #validates :address, presence: true
+  validates :road, presence: true
   
   
   def set_total_amount
     self.total_amount = donation_items.sum(:amount) 
     self.save
+  end
+
+  def address
+    "#{zipcode}#{county}#{district}#{road}"
   end
 
   # def min_dollar

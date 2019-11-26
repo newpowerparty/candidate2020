@@ -28,7 +28,14 @@ class DonationsController < ApplicationController
       :name,
       :mobile_phone,
       :total_amount,
-      :address
+      :road,
+      :county,
+      :district,
+      :zipcode
     )
+  end
+
+  def address_params
+    params.permit(:county, :district, :zipcode)
   end
 end
