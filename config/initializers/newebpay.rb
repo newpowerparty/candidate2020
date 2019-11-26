@@ -66,7 +66,7 @@ Newebpay.configure do |config|
 
       Donation.find_by(id: newebpay_response.result.merchant_order_no)
            .update_attributes!(payment_type: newebpay_response.result.payment_type, confirmed: true, confirmed_at: expired_at)
-           
+
       flash[:info] =
         "Please transfer the money to bank code #{bank_code}, account number #{account_number} before #{I18n.l(expired_at)}"
     else
@@ -111,7 +111,8 @@ Newebpay.configure do |config|
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
       p "印出donation#{donation.id}"
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
-
+      
+      p "donation錯誤#{donation.errors}"
       redirect_to "https://2020staging.npp.vote/"
     else
       p "交易狀態為 #{newebpay_response.success?}"
