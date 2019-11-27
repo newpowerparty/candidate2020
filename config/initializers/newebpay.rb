@@ -113,7 +113,9 @@ Newebpay.configure do |config|
       p "印出donation#{donation.id}"
       p "印出confirmed_at#{newebpay_response.result.pay_time}"
       p "印出payment_type#{newebpay_response.result.payment_type}"
+      p "update_before"
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
+      p "update_after"
       p Newebpay.get_error_message(error_code)
       p "donation錯誤#{donation.errors}"
       redirect_to "https://2020staging.npp.vote/"
