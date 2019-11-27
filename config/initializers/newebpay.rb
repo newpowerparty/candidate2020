@@ -108,12 +108,13 @@ Newebpay.configure do |config|
     
     if newebpay_response.success?
       p "交易成功"
+      p "商店代號#{newebpay_response.result.merchant_order_no}"
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
       p "印出donation#{donation.id}"
       p "印出confirmed_at#{newebpay_response.result.pay_time}"
       p "印出payment_type#{newebpay_response.result.payment_type}"
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
-      
+      p Newebpay.get_error_message(error_code)
       p "donation錯誤#{donation.errors}"
       redirect_to "https://2020staging.npp.vote/"
     else
