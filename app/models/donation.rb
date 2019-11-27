@@ -15,7 +15,7 @@ class Donation < ApplicationRecord
   }
 
   validates :total_amount, numericality: { only_integer: true, greater_than: 299, message: "捐款金額不得低於300" }, if: Proc.new{ |a| a.donation_category_id == 2 } 
-  validates :name, presence: { message: "不能空白" }, unless: :anonymous?
+  validates :name, presence: true, unless: :anonymous?
   validates :mobile_phone, presence: { message: "手機號碼不得為空" }, unless: :anonymous?
   validates :county, :district, :road, presence: true
   
