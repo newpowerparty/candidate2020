@@ -11,7 +11,7 @@ class DonationsController < ApplicationController
       cookies.encrypted[:donation_id] = { value: @donation.id, expires: 15.minutes.from_now }
       redirect_to donation_path(@donation)
     else
-      redirect_to root_path, notice: "新增失敗"
+      render "shared/_donation"
     end
     
   end
@@ -20,6 +20,19 @@ class DonationsController < ApplicationController
     @donation = Donation.find_by(id: params[:id] )
   end
 
+  def edit
+    @donation = Donation.find_by(id: params[:id] )
+  end
+
+  def update
+    @donation = Donation.find_by(id: params[:id] )
+    if @donation.update(donation_params)
+      redirect_to donation_path(@donation)
+    else
+      render :edit
+    end
+    
+  end
 
   private
   def donation_params

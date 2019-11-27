@@ -74,6 +74,8 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
   gem 'capistrano-figaro'
+
+  gem 'annotate'
 end
 
 group :test do

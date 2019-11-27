@@ -10,8 +10,19 @@
         <% end %>
         
         <div id="twzipcode<%= count %>"><% count += 1 %>
-          <div data-role="county" data-style="Style Name" data-name="donation[county]" data-value="110"></div>
-          <div data-role="district" data-style="Style Name" data-name="donation[district]" data-value="臺北市"></div>
+          <%= f.select :county, html:{ 
+            :'data-role' => "county",
+            :'data-style'=>"Style Name",
+            :'data-name'=>"donation[county]", 
+            :'data-value'=>"110" 
+            }%>
+          <%= f.select :district, html:{ 
+            :'data-role' => "district",
+            :'data-style'=>"Style Name",
+            :'data-name'=>"donation[district]", 
+            :'data-value'=>"臺北市" 
+            }%>
+          
           <div class="hidden"
                data-role="zipcode"
                data-name="donation[zipcode]"
@@ -32,10 +43,7 @@
       <div id="twzipcode<%= count %>"> <% count += 1 %>
         <div data-role="county" data-style="Style Name" data-name="donation[county]" data-value="110"></div>
         <div data-role="district" data-style="Style Name" data-name="donation[district]" data-value="臺北市"></div>
-        <div class="hidden"
-            data-role="zipcode"
-            data-name="donation[zipcode]"
-            >
+        <div class="hidden" data-role="zipcode" data-name="donation[zipcode]" >
         </div>
       </div>
 

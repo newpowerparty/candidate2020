@@ -11,6 +11,7 @@
 
 <p>總金額：<%= @donation.total_amount %></p>
 
+<%= link_to  "修改訂單", edit_donation_path(@donation) %>
 
 <% if @donation.confirmed.blank? %>
   <% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>

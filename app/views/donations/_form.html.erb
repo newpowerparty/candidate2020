@@ -1,0 +1,92 @@
+
+<% count = 0 %>
+
+<% if donation.donation_category_id == 1 %>
+  <% " 小物 " %>
+  <h2><%= donation.donation_rewards.first.name %></h2>
+  <%= simple_form_for donation do |f| %>
+    <%= f.input :donation_category_id, as: :hidden, input_html: {value: donation.donation_category_id} %>
+    <%= f.simple_fields_for :donation_items do |donation_item_form| %>
+      <%= render "donations/donation_item", f: donation_item_form, reward: donation.donation_rewards.first %>
+    <% end %>
+    
+    <div id="twzipcode<%= count %>"><% count += 1 %>
+      <%= f.select :county, html:{ 
+        :'data-role' => "county",
+        :'data-style'=>"Style Name",
+        :'data-name'=>"donation[county]", 
+        :'data-value'=>"110" 
+        }%>
+      <%= f.select :district, html:{ 
+        :'data-role' => "district",
+        :'data-style'=>"Style Name",
+        :'data-name'=>"donation[district]", 
+        :'data-value'=>"臺北市" 
+        }%>
+      
+      <div class="hidden"
+           data-role="zipcode"
+           data-name="donation[zipcode]"
+           >
+      </div>
+    </div>
+    <%= f.input :road, required: true %>
+    <%= f.input :name, required: true %>
+    <%= f.input :mobile_phone, required: true %>
+    <%= f.submit %>
+  <% end %>
+<% else %>
+  <h1><%= donation.donation_category.name %></h1>
+  <%= simple_form_for donation do |f| %>
+    <%= f.input :donation_category_id, as: :hidden, input_html: {value: donation.donation_category.id} %>
+  
+    <div id="twzipcode<%= count %>"><% count += 1 %>
+      <%= f.select :county, html:{ 
+        :'data-role' => "county",
+        :'data-style'=>"Style Name",
+        :'data-name'=>"donation[county]", 
+        :'data-value'=>"110" 
+        }%>
+      <%= f.select :district, html:{ 
+        :'data-role' => "district",
+        :'data-style'=>"Style Name",
+        :'data-name'=>"donation[district]", 
+        :'data-value'=>"臺北市" 
+        }%>
+      
+      <div class="hidden"
+           data-role="zipcode"
+           data-name="donation[zipcode]"
+           >
+      </div>
+    </div>
+  
+    <%= f.input :road, required: true %>
+    <%= f.input :name, required: true %>
+    <%= f.input :total_amount, required: true %>
+    <%= f.input :mobile_phone, required: true %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+ 
+
+
+
+<script language="JavaScript">
+
+    // var citizen_id_selector = $("#donation_citizen_id");
+   var county = $('.county').val();
+   var district = $('.district').val();
+   $(document).ready(function(){
+     for(i=0; i < '<%= count %>'; i++){
+       $(`#twzipcode${i}`).twzipcode({
+        zipcodeIntoDistrict: true, // 郵遞區號自動顯示在區別選單中
+        css: ["city form-control", "town form-control"], // 自訂 "城市"、"地別" class 名稱 
+        countyName: county, // 自訂城市 select 標籤的 name 值
+        districtName: district // 自訂區別 select 標籤的 name 值
+        }
+       );
+     }
+   });
+ </script>
+   

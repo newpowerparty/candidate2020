@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_26_061043) do
+ActiveRecord::Schema.define(version: 2019_11_27_080533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_061043) do
     t.bigint "donation_category_id"
     t.string "name"
     t.string "citizend"
-    t.integer "mobile_phone"
+    t.string "mobile_phone"
     t.integer "total_amount"
     t.text "description"
     t.integer "receipt_type"
@@ -103,8 +103,29 @@ ActiveRecord::Schema.define(version: 2019_11_26_061043) do
     t.index ["donation_category_id"], name: "index_donations_on_donation_category_id"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.integer "position"
+    t.string "file_name"
+    t.string "file_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_images_on_candidate_id"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.integer "position"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_videos_on_candidate_id"
+  end
+
   add_foreign_key "donation_items", "donation_rewards"
   add_foreign_key "donation_items", "donations"
   add_foreign_key "donation_rewards", "donation_categories"
   add_foreign_key "donations", "donation_categories"
+  add_foreign_key "images", "candidates"
+  add_foreign_key "videos", "candidates"
 end
