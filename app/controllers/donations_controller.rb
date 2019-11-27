@@ -1,4 +1,6 @@
 class DonationsController < ApplicationController
+  before_action :find_donation, only: [:show, :edit, :update]
+
   def create
     @donation = Donation.new(donation_params)
 
@@ -17,15 +19,12 @@ class DonationsController < ApplicationController
   end
 
   def show
-    @donation = Donation.find_by(id: params[:id] )
   end
 
   def edit
-    @donation = Donation.find_by(id: params[:id] )
   end
 
   def update
-    @donation = Donation.find_by(id: params[:id] )
     if @donation.update(donation_params)
       redirect_to donation_path(@donation)
     else
@@ -34,7 +33,7 @@ class DonationsController < ApplicationController
     
   end
 
-  private
+private
   def donation_params
     params.require(:donation).permit(
       :donation_category_id,
@@ -50,5 +49,14 @@ class DonationsController < ApplicationController
 
   def address_params
     params.permit(:county, :district, :zipcode)
+  end
+
+  def find_donation
+    @donation = Donation.find_by(id: cookies.encrypted[:donation_id])
+    unless @donation
+      flash[:error] = "很抱歉，該頁面已失效，請重新填寫。"
+      redirect_to root_path
+      return
+    end
   end
 end
