@@ -91,15 +91,17 @@ Newebpay.configure do |config|
   # end
 
   # # 每期交易完成後觸發的callback，
-  # config.periodical_notify_callback do |newebpay_response|
-  #   p "定期定額notify"
-  #   if newebpay_response.success?
-  #     PerTransaction.find_by(period_no: newebpay_response.result.period_no)
-  #          .update_attributes!(paid: true)
-  #   else
-  #     Rails.logger.info "Newebpay Periodical Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
-  #   end
-  # end
+  config.periodical_notify_callback do |newebpay_response|
+    p "定期定額notify"
+    p "印出信用卡#{newebpay_response.result.period_no}"
+    p "信用卡json #{newebpay_response.to_json}"
+    if newebpay_response.success?
+      # PerTransaction.find_by(period_no: newebpay_response.result.period_no)
+          #  .update_attributes!(paid: true)
+    else
+      Rails.logger.info "Newebpay Periodical Not Succeed: #{newebpay_response.status}: #{newebpay_response.message} (#{newebpay_response.result.to_json})"
+    end
+  end
   #-----------------------
 
   #捐款付款後觸發的callback。
@@ -112,15 +114,8 @@ Newebpay.configure do |config|
       p "json======#{newebpay_response.to_json}"
       p "商店代號#{newebpay_response.result.merchant_order_no}"
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
-      p "印出donation#{donation.id}"
-      p "印出confirmed_at#{newebpay_response.result.pay_time}"
-      p "印出payment_type#{newebpay_response.result.payment_type}"
-      p "update_before"
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
-      p "update_after"
-      p Newebpay.get_error_message(error_code)
-      p "donation錯誤#{donation.errors}"
-      
+      redirect_to "https://2020staging.npp.vote/"
     else
       p "交易狀態為 #{newebpay_response.success?}"
       p "交易失敗"
