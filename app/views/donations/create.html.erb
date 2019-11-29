@@ -1,0 +1,16 @@
+
+<%= newebpay_donation_pay_button "", "https://cdonate.newebpay.com/npp/2020guarantee", 
+  order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
+  name: @donation.name, phone: @donation.mobile_phone, payment_methods: [:credit_card, :webatm, :vacc, :barcode, :cvs],
+  receipt_address: @donation.address, return_url: "https://2020staging.npp.vote/", id: 'donation' %>
+
+
+
+
+
+
+<script language="JavaScript">
+  $(document).ready(function () {
+    $('#donation').click();
+  });
+</script>

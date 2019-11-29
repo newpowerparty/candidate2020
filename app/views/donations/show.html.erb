@@ -1,26 +1,37 @@
 
-<p>捐款項目： <%= @donation.donation_category.name %></p>
-
-<% if @donation.donation_items.present? %>
-  <% item = @donation.donation_items.first %>
-  <p>品名：<%= item.donation_reward.name %></p>
-  <p>數量：<%= item.quantity %></p>
-<% end %>
-
-<p>總金額：<%= @donation.total_amount %></p>
-
-<p>姓名：<%= @donation.name %></p> 
-<p>手機號碼：<%= @donation.mobile_phone %></p>
-<p>地址：<%= @donation.address %></p>
+<div class="donation-nav">
+    <div class="npp-logo"><%= link_to image_tag("npp_logo.png", size: "160x40", alt: "時代力量"), "https://2020staging.npp.vote/"  %></div>
+</div>
 
 
-<%= link_to  "修改訂單", edit_donation_path(@donation) %>
-
-<% if @donation.confirmed.blank? %>
-  <% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>
-  <%= newebpay_donation_pay_button "前往捐款頁面", "https://cdonate.newebpay.com/npp/2020guarantee", 
-    order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
-    name: @donation.name, phone: @donation.mobile_phone, payment_methods: [:credit_card, :webatm, :vacc, :barcode, :cvs],
-    receipt_address: @donation.address, return_url: "https://2020staging.npp.vote/", class: 'btn btn-success', id: 'donation' %>
-
-<% end %>
+<div class="donation-wrap">
+  <div class="donation">
+    <p>捐款項目： <%= @donation.donation_category.name %></p>
+    
+    <% if @donation.donation_items.present? %>
+      <% item = @donation.donation_items.first %>
+      <p>品名：<%= item.donation_reward.name %></p>
+      <p>數量：<%= item.quantity %></p>
+    <% end %>
+    
+    <p>總金額：<%= @donation.total_amount %></p>
+    
+    <p>姓名：<%= @donation.name %></p> 
+    <p>手機號碼：<%= @donation.mobile_phone %></p>
+    <p>地址：<%= @donation.address %></p>
+    
+    
+    <%= link_to  "修改訂單", edit_donation_path(@donation) %>
+    <span class="donate-btn">
+      <% if @donation.confirmed.blank? %>
+        <% "測試 https://cdonate.newebpay.com/npp/2020guarantee" %>
+      
+        <%= newebpay_donation_pay_button "前往捐款頁面", "https://cdonate.newebpay.com/npp/2020guarantee", 
+          order_number: @donation.id, description: "捐款說明", price: @donation.total_amount, address: @donation.address,
+          name: @donation.name, phone: @donation.mobile_phone, payment_methods: [:credit_card, :webatm, :vacc, :barcode, :cvs],
+          receipt_address: @donation.address, return_url: "https://2020staging.npp.vote/", class: 'btn btn-success', id: 'donation' %>
+      
+      <% end %>
+    </span>
+  </div>
+</div>
