@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   
   root "welcome#index"
   resources :donations, except: :index
-
+  
 end

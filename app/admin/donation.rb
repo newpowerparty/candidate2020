@@ -45,7 +45,7 @@ ActiveAdmin.register Donation do
   
     controller do
       def scoped_collection
-        super.includes :donation_category
+        super.includes :donation_category, :donation_rewards, :donation_items
       end
     end
   end

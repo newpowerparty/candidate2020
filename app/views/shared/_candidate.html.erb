@@ -1,6 +1,14 @@
 <% candidates.each do |candidate| %>
-  <%= candidate.name %>
-  <%= image_tag(candidate.avatar_url) %>
-  <%= candidate.school %>
-  <%= candidate.info %>
+  <div class="candidate">
+    <%= candidate.name %>
+    <%= image_tag(candidate.avatar_url) %>
+    <%= candidate.school %>
+    <%= candidate.info %>
+    <% candidate.images.each do |image| %>
+      <%= image_tag(image.file_url.thumb.url) %>
+    <% end %>
+    <% candidate.videos.each do |video| %>
+      <%= VideoInfo.new(video.file_url) %>
+    <% end %>
+  </div>
 <% end %>

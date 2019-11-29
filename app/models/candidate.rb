@@ -1,6 +1,7 @@
 class Candidate < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :images
+  has_many :videos
 end
 
 # == Schema Information

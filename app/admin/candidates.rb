@@ -11,7 +11,14 @@ ActiveAdmin.register Candidate do
     column :school
     column :info
     column :experience
+    column :images
     actions
+  end
+
+  controller do
+    def scoped_collection
+      super.includes :images, :videos
+    end
   end
 end
   

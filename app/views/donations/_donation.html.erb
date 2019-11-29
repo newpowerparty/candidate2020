@@ -8,19 +8,22 @@
         <%= f.simple_fields_for :donation_items do |donation_item_form| %>
           <%= render "donations/donation_item", f: donation_item_form, reward: reward %>
         <% end %>
-        
+        <h3>收件人<%= f.input :name, placeholder: "王小明", required: true, label: false %></h3>
+        <%= f.input :mobile_phone, placeholder: "0900-321-456" %>
+
+        <h3>寄送地址</h3>
         <div id="twzipcode<%= count %>"><% count += 1 %>
           <%= f.select :county, html:{ 
             :'data-role' => "county",
-            :'data-style'=>"Style Name",
-            :'data-name'=>"donation[county]", 
-            :'data-value'=>"110" 
+            :'data-style'=> "Style Name",
+            :'data-name'=> "donation[county]", 
+            :'data-value'=> "110" 
             }%>
           <%= f.select :district, html:{ 
             :'data-role' => "district",
-            :'data-style'=>"Style Name",
-            :'data-name'=>"donation[district]", 
-            :'data-value'=>"臺北市" 
+            :'data-style'=> "Style Name",
+            :'data-name'=> "donation[district]", 
+            :'data-value'=> "臺北市" 
             }%>
           
           <div class="hidden"
@@ -29,10 +32,8 @@
                >
           </div>
         </div>
-        <%= f.input :road, required: true %>
-        <%= f.input :name, required: true %>
-        <%= f.input :mobile_phone, required: true %>
-        <%= f.submit %>
+        <%= f.input :road, placeholder: "杭州南路一段115號2樓之1", required: true, label: false %>
+        <%= f.submit "立即付款贊助" %>
       <% end %>
     <% end %>
   <% else %>
@@ -40,18 +41,33 @@
     <%= simple_form_for @donation, :url => donations_path, :method => :post do |f| %>
       <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
 
-      <div id="twzipcode<%= count %>"> <% count += 1 %>
-        <div data-role="county" data-style="Style Name" data-name="donation[county]" data-value="110"></div>
-        <div data-role="district" data-style="Style Name" data-name="donation[district]" data-value="臺北市"></div>
-        <div class="hidden" data-role="zipcode" data-name="donation[zipcode]" >
+      <h3>贊助金額 <%= f.input :total_amount, placeholder: "500", required: true, label: false %></h3>
+      <h3>收件人<%= f.input :name, placeholder: "王小明", required: true, label: false %></h3>
+      <%= f.input :mobile_phone, placeholder: "0900-321-456" %>
+
+      <h3>寄送地址</h3>
+      <div id="twzipcode<%= count %>"><% count += 1 %>
+        <%= f.select :county, html:{ 
+          :'data-role' => "county",
+          :'data-style'=> "Style Name",
+          :'data-name'=> "donation[county]", 
+          :'data-value'=> "110" 
+          }%>
+        <%= f.select :district, html:{ 
+          :'data-role' => "district",
+          :'data-style'=> "Style Name",
+          :'data-name'=> "donation[district]", 
+          :'data-value'=> "臺北市" 
+          }%>
+        
+        <div class="hidden"
+             data-role="zipcode"
+             data-name="donation[zipcode]"
+             >
         </div>
       </div>
-
-      <%= f.input :road, required: true %>
-      <%= f.input :name, required: true %>
-      <%= f.input :total_amount, required: true %>
-      <%= f.input :mobile_phone, required: true %>
-      <%= f.submit %>
+      <%= f.input :road, placeholder: "杭州南路一段115號2樓之1", required: true, label: false %>
+      <%= f.submit "立即付款贊助" %>
     <% end %>
   <% end %>
 
