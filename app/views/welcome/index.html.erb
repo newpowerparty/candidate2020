@@ -1,8 +1,8 @@
 
-<%= render "shared/candidate", candidates: @candidates %>
+<% render "shared/candidate", candidates: @candidates %>
 
 
-<%= render partial: "shared/video_box", collection: @videos, as: :video %>
+<% render partial: "shared/video_box", collection: @videos, as: :video %>
 
 <div class="main" v-on:click="showoverlay('<%= @first_video.video_key %>')">
     <div class="title"><%= @first_video.title %></div>	
@@ -11,7 +11,7 @@
 </div>
 
 
-<% render 'donations/donation', donation_categories: @donation_categories %>
+<%= render 'donations/donation', donation_categories: @donation_categories %>
 
 
 
