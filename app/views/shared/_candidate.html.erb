@@ -1,9 +1,8 @@
 <% candidates.each do |candidate| %>
   <div class="candidate">
+    <%= image_tag(candidate.headshot_url) %>
+    <%= candidate.typee %>
     <%= candidate.name %>
-    <%= image_tag(candidate.avatar_url) %>
-    <%= candidate.school %>
-    <%= candidate.info %>
     <% candidate.images.each do |image| %>
       <%= image_tag(image.file_url.thumb.url) %>
     <% end %>
