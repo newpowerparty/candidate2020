@@ -8,6 +8,7 @@ class Candidate < ApplicationRecord
   has_many :candidate_locations
   has_many :locations, through: :candidate_locations
   has_one :social
+  has_one :contact
 end
 
 # == Schema Information

@@ -42,6 +42,7 @@ ActiveAdmin.register Candidate do
       row :social
       row :experiences
       row :educations
+      row :contact
     end
     active_admin_comments  
   end

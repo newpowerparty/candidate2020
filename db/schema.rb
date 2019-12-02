@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_070027) do
+ActiveRecord::Schema.define(version: 2019_12_02_070438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2019_12_02_070027) do
     t.datetime "updated_at", null: false
     t.string "number"
     t.text "content"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.string "phone"
+    t.string "email"
+    t.string "official_site"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_contacts_on_candidate_id"
   end
 
   create_table "donation_categories", force: :cascade do |t|
@@ -172,6 +182,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_070027) do
 
   add_foreign_key "candidate_locations", "candidates"
   add_foreign_key "candidate_locations", "locations"
+  add_foreign_key "contacts", "candidates"
   add_foreign_key "donation_items", "donation_rewards"
   add_foreign_key "donation_items", "donations"
   add_foreign_key "donation_rewards", "donation_categories"
