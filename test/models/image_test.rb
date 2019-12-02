@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id           :bigint           not null, primary key
+#  candidate_id :bigint
+#  position     :integer
+#  file_name    :string
+#  file_url     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'test_helper'
 
 class ImageTest < ActiveSupport::TestCase

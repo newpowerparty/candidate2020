@@ -10,10 +10,10 @@ end
 #
 #  id         :bigint           not null, primary key
 #  name       :string
-#  avatar     :string
-#  school     :string
-#  info       :text
-#  experience :text
+#  headshot   :string
+#  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  number     :string
+#  content    :text
 #
