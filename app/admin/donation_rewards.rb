@@ -1,5 +1,5 @@
 ActiveAdmin.register DonationReward do
-    permit_params :donation_category_id, :name, :image, :amount, :active
+    permit_params :donation_category_id, :name, :image, :amount, :active, :position
   
     index do
       selectable_column
@@ -10,6 +10,7 @@ ActiveAdmin.register DonationReward do
         image_tag product.image.thumb.url
       end
       column :amount
+      column :position
       column :active
       actions
     end
@@ -23,6 +24,7 @@ ActiveAdmin.register DonationReward do
           image_tag ad.image.thumb.url
         end
         row :amount
+        row :position
         row :active
       end
     end
@@ -35,6 +37,7 @@ ActiveAdmin.register DonationReward do
         f.input :name
         f.input :image, :as => :file, :hint => f.object.image.present? ? image_tag(f.object.image.thumb.url) : content_tag(:span, "no cover page yet")
         f.input :amount
+        f.input :position
         f.input :active
       end
       f.actions
