@@ -5,6 +5,7 @@ class Candidate < ApplicationRecord
   has_many :videos
   has_many :candidate_locations
   has_many :locations, through: :candidate_locations
+  has_one :social
 end
 
 # == Schema Information

@@ -5,25 +5,23 @@ ActiveAdmin.register Candidate do
     selectable_column
     id_column
     column :number
+    column :typee
     column :name
     column :avatar do |product|
       image_tag product.headshot.thumb.url
     end
-    column :typee
     column :content
-    column :images
-    column :locations
     actions
   end
   
   form do |f|
     f.inputs do
+      f.input :number
+      f.input :typee
       f.input :name
       f.input :headshot do |product|
         image_tag product.headshot.thumb.url
       end
-      f.input :typee
-      f.input :number
       f.input :content
     end
     f.actions
@@ -41,6 +39,7 @@ ActiveAdmin.register Candidate do
       row :images
       row :locations 
       row :titles
+      row :social
     end
     active_admin_comments  
   end
