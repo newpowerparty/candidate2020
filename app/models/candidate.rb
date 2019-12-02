@@ -1,5 +1,6 @@
 class Candidate < ApplicationRecord
   mount_uploader :headshot, AvatarUploader
+  has_many :titles
   has_many :images
   has_many :videos
   has_many :candidate_locations

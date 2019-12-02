@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_052422) do
+ActiveRecord::Schema.define(version: 2019_12_02_055343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,14 @@ ActiveRecord::Schema.define(version: 2019_12_02_052422) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "titles", force: :cascade do |t|
+    t.string "content"
+    t.bigint "candidate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_titles_on_candidate_id"
+  end
+
   create_table "videos", force: :cascade do |t|
     t.bigint "candidate_id"
     t.integer "position"
@@ -144,5 +152,6 @@ ActiveRecord::Schema.define(version: 2019_12_02_052422) do
   add_foreign_key "donation_rewards", "donation_categories"
   add_foreign_key "donations", "donation_categories"
   add_foreign_key "images", "candidates"
+  add_foreign_key "titles", "candidates"
   add_foreign_key "videos", "candidates"
 end

@@ -29,9 +29,25 @@ ActiveAdmin.register Candidate do
     f.actions
   end
 
+  show do 
+    attributes_table do
+      row :number
+      row :name
+      row :image do |ad|
+        image_tag ad.headshot.url
+      end
+      row :typee
+      row :content
+      row :images
+      row :locations 
+      row :titles
+    end
+    active_admin_comments  
+  end
+
   controller do
     def scoped_collection
-      super.includes :images, :videos, :locations
+      super.includes :images, :videos, :locations, :titles
     end
   end
 end
