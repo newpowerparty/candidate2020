@@ -3,6 +3,7 @@ class Candidate < ApplicationRecord
   has_many :titles
   has_many :images
   has_many :videos
+  has_many :experiences
   has_many :candidate_locations
   has_many :locations, through: :candidate_locations
   has_one :social

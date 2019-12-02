@@ -40,13 +40,14 @@ ActiveAdmin.register Candidate do
       row :locations 
       row :titles
       row :social
+      row :experiences
     end
     active_admin_comments  
   end
 
   controller do
     def scoped_collection
-      super.includes :images, :videos, :locations, :titles
+      super.includes :images, :videos, :locations, :titles, :experiences
     end
   end
 end
