@@ -1,23 +1,37 @@
 ActiveAdmin.register Candidate do
-  permit_params :name, :avatar, :school, :info, :experience
+  permit_params :name, :headshot, :typee, :number, :content
 
   index do
     selectable_column
     id_column
+    column :number
     column :name
     column :avatar do |product|
-      image_tag product.avatar.thumb.url
+      image_tag product.headshot.thumb.url
     end
-    column :school
-    column :info
-    column :experience
+    column :typee
+    column :content
     column :images
+    column :locations
     actions
+  end
+  
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :headshot do |product|
+        image_tag product.headshot.thumb.url
+      end
+      f.input :typee
+      f.input :number
+      f.input :content
+    end
+    f.actions
   end
 
   controller do
     def scoped_collection
-      super.includes :images, :videos
+      super.includes :images, :videos, :locations
     end
   end
 end

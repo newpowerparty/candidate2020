@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_033234) do
+ActiveRecord::Schema.define(version: 2019_12_02_052422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,10 +41,19 @@ ActiveRecord::Schema.define(version: 2019_12_02_033234) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "candidate_locations", force: :cascade do |t|
+    t.bigint "location_id"
+    t.bigint "candidate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_candidate_locations_on_candidate_id"
+    t.index ["location_id"], name: "index_candidate_locations_on_location_id"
+  end
+
   create_table "candidates", force: :cascade do |t|
     t.string "name"
     t.string "headshot"
-    t.string "type"
+    t.string "typee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "number"
@@ -113,6 +122,12 @@ ActiveRecord::Schema.define(version: 2019_12_02_033234) do
     t.index ["candidate_id"], name: "index_images_on_candidate_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "videos", force: :cascade do |t|
     t.bigint "candidate_id"
     t.integer "position"
@@ -122,6 +137,8 @@ ActiveRecord::Schema.define(version: 2019_12_02_033234) do
     t.index ["candidate_id"], name: "index_videos_on_candidate_id"
   end
 
+  add_foreign_key "candidate_locations", "candidates"
+  add_foreign_key "candidate_locations", "locations"
   add_foreign_key "donation_items", "donation_rewards"
   add_foreign_key "donation_items", "donations"
   add_foreign_key "donation_rewards", "donation_categories"

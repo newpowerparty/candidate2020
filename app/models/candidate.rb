@@ -1,7 +1,9 @@
 class Candidate < ApplicationRecord
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :headshot, AvatarUploader
   has_many :images
   has_many :videos
+  has_many :candidate_locations
+  has_many :locations, through: :candidate_locations
 end
 
 # == Schema Information
