@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= display_meta_tags site: "時代力量 New Power Party", 
+					  title: "2018選舉專區API",
+					  charset: 'UTF-8',
+					  reverse: true,
+					  icon: image_path("favicon.ico"), 
+					  viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
+					  author: "時代力量 New Power Party",
+					  fb: {
+					  	app_id: Settings.facebook.app_id
+					  },
+					  og: {
+					  	site_name: :site,
+					  	title: :title,
+					  	description: :description,
+					  	type: 'website',
+					  	url: request.original_url,
+					  	locale: "zh_TW"
+					  } %>
+    <%= csrf_meta_tags %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+
+  <body class="bg-light">
+    <div class="container">
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand" href="">2018選舉專區API</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="<%= root_path%>">前往主站</a>
+		      </li>
+		    </ul>
+		    
+		  </div>
+		</nav>
+		<div class="card">
+		  <div class="card-body">
+		  	<p class="card-text">Version：1.1</p>
+		  	<hr>
+		    <h5 class="card-title">格式</h5>
+		    <p class="card-text"><%= link_to "JSON API", "https://github.com/json-api/json-api", target: :_blank%>（使用<%= link_to "fast_jsonapi", "https://github.com/Netflix/fast_jsonapi", target: :_blank%>產生）</p>
+		  </div>
+		  
+		</div>
+		<div class="card">
+	      	<div class="card-body">
+				<h5 class="card-title">縣市議員候選人資料</h5>
+			    
+	    		<p class="card-text">欄位</p>
+			    <ul>
+			    	<li>name：<%= Candidate.human_attribute_name(:name)%></li>
+			    	<li>avatar：<%= Candidate.human_attribute_name(:avatar)%>(300x300)</li>
+			    	<li>region：<%= Candidate.human_attribute_name(:region)%></li>
+			    	<li>vote_number：<%= Candidate.human_attribute_name(:vote_number)%>（抽籤後產生）</li>
+			    	<li>info：<%= Candidate.human_attribute_name(:info)%></li>
+			    	<li>title：<%= Candidate.human_attribute_name(:title)%></li>
+			    	<li>experience：<%= Candidate.human_attribute_name(:experience)%></li>
+			    	<li>school：<%= Candidate.human_attribute_name(:school)%></li>
+			    	<li>social_media：<%= Candidate.human_attribute_name(:social_media)%></li>
+			    	<li>contact：<%= Candidate.human_attribute_name(:contact)%></li>
+			    	<li>
+			    		relationships：
+			    		<ul>
+			    			<li>images：各候選人圖片，最多8張（300x200）</li>
+			    			<li>city：參選縣市</li>
+			    			<li>videos：各候選人影片（Youtube）</li>
+			    		</ul>
+			    	</li>
+			    </ul>
+			    <p class="card-text">全體：<%= link_to api_v1_candidates_url, api_v1_candidates_url, target: :_blank%></p>
+			    <p class="card-text">範例</p>
+			    <div class="card bg-light mb-3">
+				  <div class="card-body">
+				    <code>
+				    	<%= @demo_candidates%>
+					</code>
+				  </div>
+				</div>
+			    <p class="card-text">個別：<%= link_to "https://npp.vote/api/v1/candidate/:id", api_v1_candidate_url(30), target: :_blank%></p>
+			    <p class="card-text">ID對照表</p>
+			    <div class="card bg-light mb-3">
+				  <div class="card-body">
+				    
+				    	<code>
+				    		<%= @id_tables%>
+				    	</code>
+				    	
+					
+				  </div>
+				</div>
+	      	</div>
+	    </div>
+	    <div class="card">
+	      	<div class="card-body">
+				<h5 class="card-title">參選縣市</h5>
+			    <p class="card-text">全體：<%= link_to api_v1_cities_url, api_v1_cities_url, target: :_blank%></p>
+			    <p class="card-text">範例</p>
+			    <div class="card bg-light mb-3">
+				  <div class="card-body">
+				    <code>
+				    	<%= @demo_cities%>
+					</code>
+				  </div>
+				</div>
+			    <p class="card-text">個別：<%= link_to "https://npp.vote/api/v1/city/:id", api_v1_city_url(@cities.first), target: :_blank%></p>
+			    <p class="card-text">ID對照表</p>
+			    <div class="card bg-light mb-3">
+				  <div class="card-body">
+				    
+				    	<code>
+				    		<%= @city_id_tables%>
+				    	</code>
+				    	
+					
+				  </div>
+				</div>
+	      	</div>
+	    </div>
+	</div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>

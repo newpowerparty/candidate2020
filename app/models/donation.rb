@@ -29,12 +29,6 @@ class Donation < ApplicationRecord
     "#{county}#{district}#{road}"
   end
 
-  # def min_dollar
-  #   if total_amount < 300
-  #     errors.add(:total_amount, "小於最低捐款金額")
-  #     throw :abort
-  #   end
-  # end
 
 end
 

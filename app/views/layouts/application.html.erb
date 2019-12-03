@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW" class="no-js">
   <head>
-    <title>2020選舉專區</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <%= display_meta_tags site: @site, 
+              title: @title,
+              description: @description,
+              keywords: @meta_keyword,
+              charset: 'UTF-8',
+              reverse: true,
+              icon: image_path("favicon.ico"), 
+              viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+              author: "時代力量 New Power Party",
+              image_src: "#{request.original_url}#{@image}",
+              fb: {
+                app_id: ENV['FACEBOOK_APP_ID']
+              },
+              og: {
+                site_name: :site,
+                title: :title,
+                description: :description,
+                type: 'website',
+                url: request.original_url,
+                locale: "zh_TW",
+                image: [{
+                  _: :image_src,
+                  alt: :title,
+                  width: 600,
+                  height: 325
+                  }]
+              },
+              twitter: {
+                card: "summary_large_image",
+                description: :description,
+                title: :title,
+                image: :image_src
+              } %>
+    <meta itemprop="name" content="<%= @title%>">
+    <meta itemprop="description" content="<%= @description%>">
+    <meta itemprop="image" content= <%= "#{request.original_url}#{@image}" %> > 
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= favicon_link_tag('favicon.png', type: 'image/png') %>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.twzipcode.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
