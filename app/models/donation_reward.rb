@@ -1,4 +1,5 @@
 class DonationReward < ApplicationRecord
+  default_scope {order(position: :asc)}
   belongs_to :donation_category
   mount_uploader :image, AvatarUploader
   

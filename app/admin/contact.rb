@@ -1,13 +1,13 @@
 ActiveAdmin.register Contact do
-    permit_params :candidate_id, :phone, :email, :official_site
+    permit_params :candidate_id, :name, :typee, :text
   
     index do
       selectable_column
       id_column
       column :candidate
-      column :phone
-      column :email
-      column :official_site
+      column :typee
+      column :name
+      column :text
       actions
     end
   
@@ -16,9 +16,9 @@ ActiveAdmin.register Contact do
     form do |f|
       f.inputs do
         f.input :candidate
-        f.input :phone
-        f.input :email
-        f.input :official_site
+        f.input :typee
+        f.input :name
+        f.input :text
       end
       f.actions
     end
