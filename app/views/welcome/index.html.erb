@@ -4,23 +4,8 @@
 
 <% render partial: "shared/video_box", collection: @videos, as: :video %>
 
-<div class="main" v-on:click="showoverlay('<%= @first_video.video_key %>')">
-    <div class="title"><%= @first_video.title %></div>	
-    <div class="play_button"  ></div>
-    <div :style="bg_style('<%= @first_video.video_meta.thumbnail_large %>')" class="video-bg"></div>	
-</div>
-
 
 <%= render 'donations/donation', donation_commodity: @donation_commodity, donation_free: @donation_free, donation: @donation %>
 
 
 
-<% if false || @first_video.present? %>
-  <section id="video" class="video panel-4">
-  <h1 class="hidden-h1">概念短片</h1>
-  <div class="main" v-on:click="showoverlay('<%= @first_video.id %><%= @first_video.video_key %>')">
-  	<div class="title"><%= @first_video.title %></div>	
-  	<div class="play_button"  ></div>
-  	<div :style="bg_style('<%= @first_video.image %>')" class="video-bg"></div>	
-  </div>
-<% end %>
