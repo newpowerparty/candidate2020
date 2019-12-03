@@ -1,10 +1,8 @@
 <% count = 0 %>
-<% donation_categories.each do |category| %>
-  <% if category.donation_rewards.present? %>
-    <% category.donation_rewards.each do |reward| %>
-      <h1><%= reward.name %></h1>
+    <% donation_commodity.donation_rewards.each do |reward| %>
+      <h1><%= reward.heading %></h1>
       <%= simple_form_for @donation, :url => donations_path, :method => :post do |f| %>
-        <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
+        <%= f.input :donation_category_id, as: :hidden, input_html: {value: donation_commodity.id} %>
         <%= f.simple_fields_for :donation_items do |donation_item_form| %>
           <%= render "donations/donation_item", f: donation_item_form, reward: reward %>
         <% end %>
@@ -36,10 +34,9 @@
         <%= f.submit "立即付款贊助" %>
       <% end %>
     <% end %>
-  <% else %>
-    <h1><%= category.name %></h1>
+    <h1><%= donation_free.name %></h1>
     <%= simple_form_for @donation, :url => donations_path, :method => :post do |f| %>
-      <%= f.input :donation_category_id, as: :hidden, input_html: {value: category.id} %>
+      <%= f.input :donation_category_id, as: :hidden, input_html: {value: donation_free.id} %>
 
       <h3>贊助金額 <%= f.input :total_amount, placeholder: "500", required: true, label: false %></h3>
       <h3>收件人<%= f.input :name, placeholder: "王小明", required: true, label: false %></h3>
@@ -69,10 +66,6 @@
       <%= f.input :road, placeholder: "杭州南路一段115號2樓之1", required: true, label: false %>
       <%= f.submit "立即付款贊助" %>
     <% end %>
-  <% end %>
-
-<% end %>
-
 
 <script language="JavaScript">
 

@@ -3,8 +3,15 @@ class DonationReward < ApplicationRecord
   belongs_to :donation_category
   mount_uploader :image, AvatarUploader
   
+  validate  :can_sell?
+
   def name_amount
-    "#{name} - #{amount}#{I18n.t(:dollar, scope: [:misc])}"
+    "#{heading} - #{amount}#{I18n.t(:dollar, scope: [:misc])}"
+  end
+
+  private
+  def can_sell?
+    active?
   end
 end
 

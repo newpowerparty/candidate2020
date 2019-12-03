@@ -3,9 +3,9 @@ class WelcomeController < ApplicationController
   def index
     @system ||= System.first
 		@title ||= @system.name
-		@title ||= "2020選舉專區"
+		@title ||= "時代力量 2020 公平正義 改變台灣"
 		@description ||= @system.description
-		@description ||= "兩年前，時代力量走進立法院，讓理想在國會實踐；兩年後的現在，讓我們從地方開始，加速台灣的改變。邀請您一同加入保證金募資專案，任何一筆捐款，無論金額大小，都能幫助時代力量在地方議會繼續茁壯。"
+		@description ||= "政黨票請投時代力量，用公平正義改變台灣！請認識我們推出的優秀候選人、瞭解我們在11大領域推出的政見，我們堅持用實質改革推動台灣進步！"
 
 		@image ||= ActionController::Base.helpers.image_path("fb-cover.png")
 
@@ -15,8 +15,9 @@ class WelcomeController < ApplicationController
     
     @candidates = Candidate.includes(:images, :videos).all
     @videos ||= Video.where(candidate_id: nil)
-		@first_video ||= @videos.first
-    @donation_categories = DonationCategory.includes(:donation_rewards).all
+    @first_video ||= @videos.first
+    @donation_commodity, @donation_free = DonationCategory.includes(:donation_rewards).first, DonationCategory.includes(:donation_rewards).last
+
     @donation = Donation.new
 
   end

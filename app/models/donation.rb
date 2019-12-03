@@ -19,7 +19,7 @@ class Donation < ApplicationRecord
   validates :mobile_phone, presence: { message: "手機號碼不得為空" }, unless: :anonymous?
   validates :county, :district, presence: { message: "請選擇縣市區域" }
   validates :road, presence: true
-  
+
   def set_total_amount
     self.total_amount = donation_items.sum(:amount) 
     self.save
@@ -28,7 +28,6 @@ class Donation < ApplicationRecord
   def address
     "#{county}#{district}#{road}"
   end
-
 
 end
 

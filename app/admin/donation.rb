@@ -12,7 +12,7 @@ ActiveAdmin.register Donation do
       column :donation_category
       column :name
       column :donation_rewards do |donation|
-        donation.donation_rewards
+        donation.donation_rewards.pluck(:heading)
       end
       column :donation_items do |donation|
         donation.donation_items.pluck(:quantity)

@@ -115,6 +115,9 @@ Newebpay.configure do |config|
       p "商店代號#{newebpay_response.result.merchant_order_no}"
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
+      total_donation = System.first.total_donation
+      System.first.update(total_donation: newebpay_response.result.amt + total_donation )
+      
       redirect_to "https://2020staging.npp.vote/"
     else
       p "交易狀態為 #{newebpay_response.success?}"
