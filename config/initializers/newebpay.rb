@@ -110,13 +110,13 @@ Newebpay.configure do |config|
     
     if newebpay_response.success?
       p "交易成功"
-      p "result======#{newebpay_response.result.to_json}"
+      p "result======#{newebpay_response.result}"
       p "json======#{newebpay_response.to_json}"
       p "商店代號#{newebpay_response.result.merchant_order_no}"
       donation = Donation.find_by(id: newebpay_response.result.merchant_order_no)
       donation.update_attributes!(confirmed: true, confirmed_at: newebpay_response.result.pay_time, payment_type: newebpay_response.result.payment_type)
-      total_donation = System.first.total_donation.to_i
-      System.first.update(total_donation: newebpay_response.result.amt + total_donation )
+      total = System.first.total_donation.to_i + newebpay_response.result.amt.to_i
+      System.first.update(total_donation: total )
 
       redirect_to "https://2020staging.npp.vote/"
     else
